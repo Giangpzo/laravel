@@ -1,3 +1,4 @@
 /src/vendor
 .env
 /nginx/log
+/src/storage/logs
