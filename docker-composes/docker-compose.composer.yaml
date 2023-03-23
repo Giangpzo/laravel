@@ -7,3 +7,5 @@ services:
       dockerfile: composer.dockerfile
     volumes:
       - ../src:/var/www/html
+    networks:
+      - net

@@ -1,5 +1,8 @@
-init-code:
-	sudo docker compose -f ./docker-composes/docker-compose.composer.yaml run --rm composer create-project laravel/laravel .
+# makefile tutorial
+# https://makefiletutorial.com/#include-makefiles
+
+OTHER_MAKE_FILES = ./makefiles/*
+include $(OTHER_MAKE_FILES)
 
 up:
 	sudo docker compose -f ./docker-composes/docker-compose.yaml up -d
