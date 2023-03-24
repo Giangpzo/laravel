@@ -7,6 +7,9 @@ include $(OTHER_MAKE_FILES)
 up:
 	sudo docker compose -f ./docker-composes/docker-compose.yaml up -d
 
+up-build:
+	sudo docker compose -f ./docker-composes/docker-compose.yaml up -d --build
+
 down:
 	sudo docker compose -f ./docker-composes/docker-compose.yaml down
 
