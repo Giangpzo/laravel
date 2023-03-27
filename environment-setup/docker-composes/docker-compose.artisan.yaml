@@ -4,10 +4,10 @@ services:
   artisan:
     build:
       context: ../dockerfiles
-      dockerfile: php.dockerfile
+      dockerfile: ../dockerfiles/php.dockerfile
     container_name: 'laravel_artisan'
     volumes:
-      - ../src:/var/www/html
+      - ../../:/var/www/html
     entrypoint: ['php','/var/www/html/artisan']
 
     # all docker compose files must have same net work

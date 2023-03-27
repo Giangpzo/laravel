@@ -4,8 +4,8 @@ services:
   composer:
     build:
       context: ../dockerfiles
-      dockerfile: composer.dockerfile
+      dockerfile: ../dockerfiles/composer.dockerfile
     volumes:
-      - ../src:/var/www/html
+      - ../../:/var/www/html
     networks:
       - net

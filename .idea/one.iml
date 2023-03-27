@@ -8,9 +8,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/src/app" isTestSource="false" packagePrefix="App\" />
       <sourceFolder url="file://$MODULE_DIR$/src/database/factories" isTestSource="false" packagePrefix="Database\Factories\" />
-      <excludeFolder url="file://$MODULE_DIR$/nginx/log" />
+      <excludeFolder url="file://$MODULE_DIR$/environment-setup/nginx/log" />
       <excludeFolder url="file://$MODULE_DIR$/src/storage/logs" />
       <excludeFolder url="file://$MODULE_DIR$/src/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
