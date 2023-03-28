@@ -28,6 +28,9 @@ services:
     # add extra hosts just for linux
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      # config server name for debugging both api and command line
+      - PHP_IDE_CONFIG=serverName=laravel_study
     networks:
       - net
 
