@@ -1,18 +1,26 @@
+MAIN_COMPOSER_FILE = ./environment-setup/docker-composes/docker-compose.yaml
+ARTISAN_COMPOSER_FILE = ./environment-setup/docker-composes/docker-compose.artisan.yaml
+REQUEST_BASE_PATH = App/Modules/
+
 migrate:
 	# include docker-compose.yaml file first to merge some config (ex: network)
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --rm artisan migrate
+	sudo docker -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan migrate
 
 clear-cache:
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --rm artisan cache:clear
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan cache:clear
 
 maintenance-on:
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --rm artisan down --render="maintenance"
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan down --render="maintenance"
 
 maintenance-off:
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --rm artisan up
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan up
 
 artisan-sh:
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --rm --entrypoint='' artisan sh
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm --entrypoint='' artisan sh
 
 artisan-sh-refresh:
-	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml -f ./environment-setup/docker-composes/docker-compose.artisan.yaml run --build --rm --entrypoint='' artisan sh
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --build --rm --entrypoint='' artisan sh
+
+form-request:
+	# argument like this: file_path='Auth/Requests/TestRequest'
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan make:request $(REQUEST_BASE_PATH)$(file_path)

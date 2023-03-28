@@ -13,3 +13,5 @@ up-build:
 down:
 	sudo docker compose -f ./environment-setup/docker-composes/docker-compose.yaml down
 
+permission:
+	sudo chown -R giangpzo ../one/
