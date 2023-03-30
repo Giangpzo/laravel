@@ -1,0 +1,10 @@
+{
+  "name": "learning/export",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "App\\Modules\\ExportEngine\\ServiceProviders\\RouteServiceProvider"
+      ]
+    }
+  }
+}
