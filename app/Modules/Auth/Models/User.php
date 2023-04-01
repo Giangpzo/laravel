@@ -54,4 +54,21 @@ class User extends Authenticatable
             fn(string $value) => bcrypt($value)
         );
     }
+
+    /**
+     * Removes access tokens.
+     *
+     * @param string $appName The application name
+     * @return void
+     */
+    public function revokeExistingTokensFor(string $appName)
+    {
+        $this->tokens()->where([
+            'name' => $appName,
+            'revoked' => false,
+        ])->update([
+            'revoked' => true,
+            'updated_at' => now(),
+        ]);
+    }
 }

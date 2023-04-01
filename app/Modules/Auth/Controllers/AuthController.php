@@ -39,10 +39,16 @@ class AuthController extends ApiController
     {
         $validated = $request->validated();
 
+        $tokenName = 'learning_laravel';
+
         if (Auth::attempt($validated)) {
             /** @var User $user */
             $user = auth()->user();
-            $token = $user->createToken('learning_laravel')->accessToken;
+
+            # Revoke all existing tokens
+            $user->revokeExistingTokensFor($tokenName);
+
+            $token = $user->createToken($tokenName)->accessToken;
 
             return $this->respondSuccess([
                 'user' => $user,
