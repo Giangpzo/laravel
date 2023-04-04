@@ -46,6 +46,14 @@ services:
     networks:
       - net
 
+  redis:
+    image: redis
+    container_name: "laravel_redis"
+    networks:
+      - net
+    ports:
+      - 63799:6379
+
 networks:
   net:
     driver: "bridge"
