@@ -24,3 +24,9 @@ artisan-sh-refresh:
 form-request:
 	# argument like this: file_path='Auth/Requests/TestRequest'
 	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan make:request $(REQUEST_BASE_PATH)$(file_path)
+
+queue-work:
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm -d artisan queue:work
+
+queue-restart:
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm -d artisan queue:restart
