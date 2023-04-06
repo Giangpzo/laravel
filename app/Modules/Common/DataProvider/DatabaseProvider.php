@@ -52,4 +52,19 @@ class DatabaseProvider
 
         return $this->modelInstance;
     }
+
+    /**
+     * Get model by id
+     *
+     * @param $id
+     * @return null
+     */
+    public function getById($id)
+    {
+        if (!$id instanceof Model) {
+            return $this->newQuery()->find($id);
+        }
+
+        return null;
+    }
 }

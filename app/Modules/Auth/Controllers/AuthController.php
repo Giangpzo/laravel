@@ -7,10 +7,11 @@ use App\Modules\Auth\DataProvider\AuthProvider;
 use App\Modules\Auth\Models\User;
 use App\Modules\Auth\Requests\LoginRequest;
 use App\Modules\Auth\Requests\RegisterRequest;
+use App\Modules\Auth\Transformers\UserTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
+use Spatie\Fractalistic\ArraySerializer;
 
 class AuthController extends ApiController
 {
@@ -51,7 +52,7 @@ class AuthController extends ApiController
             $token = $user->createToken($tokenName)->accessToken;
 
             return $this->respondSuccess([
-                'user' => $user,
+                'user' => fractal($user, new UserTransformer())->toArray(),
                 'token' => $token
             ]);
         }
@@ -83,7 +84,7 @@ class AuthController extends ApiController
      */
     public function getMe()
     {
-        $user = auth()->user();
+        $user = fractal(auth()->user(), new UserTransformer())->toArray();
         return $this->respondSuccess($user, 'get me');
     }
 }

@@ -30,3 +30,7 @@ queue-work:
 
 queue-restart:
 	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm -d artisan queue:restart
+
+seeder:
+	# argument like this: file_path='Auth/Requests/TestRequest'
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan make:seeder $(file_path)

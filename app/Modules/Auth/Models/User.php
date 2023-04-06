@@ -2,6 +2,7 @@
 
 namespace App\Modules\Auth\Models;
 
+use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     const TYPE_ADMIN = 0;
-    const TYPE_NORMAL_USER = 1;
+    const TYPE_CUSTOMER = 2;
 
     /**
      * The attributes that are mass assignable.
@@ -73,5 +74,18 @@ class User extends Authenticatable
             'revoked' => true,
             'updated_at' => now(),
         ]);
+    }
+
+    protected function getIsAdminAttribute(){
+        return $this->type == self::TYPE_ADMIN;
+    }
+
+    protected function getIsCustomerAttribute(){
+        return $this->type == self::TYPE_CUSTOMER;
+    }
+
+    protected static function newFactory()
+    {
+        return UserFactory::new();
     }
 }
