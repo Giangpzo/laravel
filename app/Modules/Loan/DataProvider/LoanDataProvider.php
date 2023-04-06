@@ -4,6 +4,7 @@ namespace App\Modules\Loan\DataProvider;
 
 use App\Modules\Common\DataProvider\DatabaseProvider;
 use App\Modules\Loan\Models\Loan;
+use App\Modules\Loan\Models\ScheduledRepayment;
 
 class LoanDataProvider extends DatabaseProvider
 {
@@ -47,5 +48,23 @@ class LoanDataProvider extends DatabaseProvider
         $loan->approver_notes = $notes;
 
         return $loan->save();
+    }
+
+    /**
+     * If all repayments was paid, change status of loan to paid, too
+     *
+     * @param Loan $loan
+     */
+    public function shouldUpdateStatusToPaid(Loan $loan)
+    {
+        $repaymentsAllPaid = $loan->repayments->every(function ($repayment) {
+            return $repayment->status == ScheduledRepayment::STATUS_PAID;
+        });
+
+        if ($repaymentsAllPaid) {
+            $this->update($loan, [
+                'status' => Loan::STATUS_PAID
+            ]);
+        }
     }
 }

@@ -13,8 +13,8 @@ Route::prefix('{loan}')->group(function (){
     Route::post('/approve',[LoanController::class,'approveLoanRequest'])->name('approveLoanRequest');
     Route::post('/reject',[LoanController::class,'rejectLoanRequest'])->name('rejectLoanRequest');
 
-    Route::prefix('scheduled-repayment')->group(function (){
-        Route::get('/',[RepaymentController::class, 'loanRepayments'])->name('loanRepayments');
+    Route::prefix('scheduled-repayment')->name('scheduled-repayment.')->group(function (){
+        Route::get('/',[RepaymentController::class, 'index'])->name('index');
         Route::post('/{repayment}/repay',[RepaymentController::class,'repay'])->name('repay');
     });
 });

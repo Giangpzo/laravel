@@ -17,8 +17,8 @@ return new class extends Migration
             $table->date('repayment_date');
             $table->unsignedBigInteger('amount');
             $table->unsignedTinyInteger('status')->default(0);
-            $table->date('actual_repayment_date');
-            $table->unsignedBigInteger('actual_amount');
+            $table->date('actual_repayment_date')->nullable(true);
+            $table->unsignedBigInteger('actual_amount')->nullable(true);
 
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Modules\Loan\ServiceProviders;
 
 use App\Modules\Loan\DataProvider\LoanDataProvider;
+use App\Modules\Loan\DataProvider\ScheduledRepaymentProvider;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as LaravelRouteServiceProvider;
@@ -20,6 +21,17 @@ class RouteServiceProvider extends LaravelRouteServiceProvider
             }
 
             return $loan;
+        });
+
+        Route::bind('repayment', function ($id) {
+            /** @var ScheduledRepaymentProvider $provider */
+            $provider = app()->make(ScheduledRepaymentProvider::class);
+            $repayment = $provider->getById($id);
+            if (empty($repayment)){
+                throw new ModelNotFoundException('The repayment you are finding is not exist or not belong to you!');
+            }
+
+            return $repayment;
         });
 
         $this->routes(function () {
