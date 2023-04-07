@@ -56,7 +56,7 @@ class IndexTest extends LoanTestCase
 
         $response->assertOk();
         // because loan has just created without approving, so repayments temporary empty!
-        $this->assertCount(0,data_get($response->json(), 'data'));
+        $this->assertCount(0, data_get($response->json(), 'data'));
     }
 
     public function test_admin_can_view_every_repayment(): void
@@ -67,7 +67,23 @@ class IndexTest extends LoanTestCase
         $response = $this->actingAsAdmin()->get($url);
 
         $response->assertOk();
-        // because loan has just created without approving, so repayments temporary empty!
-        $this->assertCount(0,data_get($response->json(), 'data'));
+        // because loan has just created without approving, so repayments temporary empty! --> tested in next case
+        $this->assertCount(0, data_get($response->json(), 'data'));
+    }
+
+    public function test_admin_view_repayments_of_approved_loan(): void
+    {
+        $loan = $this->createLoan(['amount' => 15000, 'term' => 3]); // 3 repayments
+        $adminHttp = $this->actingAsAdmin();
+
+        $adminHttp->post($this->url . '/' . $loan->id . '/approve', ['notes' => 'test with sync queue']);
+
+        $listRepaymentsUrl = $this->calculateActualUrl($loan);
+        $response = $adminHttp->get($listRepaymentsUrl);
+
+        $response->dump('data');
+
+        $response->assertOk();
+        $this->assertCount(3, data_get($response->json(), 'data'));
     }
 }
