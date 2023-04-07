@@ -3,11 +3,16 @@
 namespace App\Modules\Loan\Models;
 
 use App\Modules\Loan\Scopes\LoanScope;
+use Database\Factories\Loan\LoanFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Loan extends Model
 {
+    use HasFactory;
+
     protected $table = 'loans';
 
     protected $guarded = [];
@@ -32,5 +37,13 @@ class Loan extends Model
     public function repayments(): HasMany
     {
         return $this->hasMany(ScheduledRepayment::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return LoanFactory::new();
     }
 }

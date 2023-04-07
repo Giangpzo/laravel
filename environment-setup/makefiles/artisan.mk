@@ -34,3 +34,11 @@ queue-restart:
 seeder:
 	# argument like this: file_path='Auth/Requests/TestRequest'
 	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan make:seeder $(file_path)
+
+test:
+	# argument like this: filter=test_admin_can_request_index
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan test
+
+test-filter:
+	# argument like this: filter=test_admin_can_request_index
+	sudo docker compose -f $(MAIN_COMPOSER_FILE) -f $(ARTISAN_COMPOSER_FILE) run --rm artisan test --filter=$(filter)

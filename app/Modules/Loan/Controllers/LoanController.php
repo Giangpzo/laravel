@@ -27,7 +27,7 @@ class LoanController extends ApiController
     {
         $loans = Loan::query()->paginate($request->get('per_page'));
 
-        return $this->respondSuccess($loans, 'retrieved loans success');
+        return $this->respondSuccess(fractal($loans, new LoanShowTransformer())->toArray(), 'retrieved loans success');
     }
 
     /**
