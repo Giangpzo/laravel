@@ -2,16 +2,10 @@
 
 namespace Tests\Feature\Loan\LoanApi;
 
-use App\Modules\Auth\Models\User;
 use App\Modules\Loan\Models\Loan;
 use Illuminate\Http\Response;
-use Illuminate\Support\Arr;
 use Tests\Feature\Loan\LoanTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\DB;
-use Laravel\Passport\ClientRepository;
-use Tests\TestCase;
 
 class ShowTest extends LoanTestCase
 {
