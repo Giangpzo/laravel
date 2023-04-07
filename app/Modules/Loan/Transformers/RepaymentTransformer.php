@@ -15,7 +15,8 @@ class RepaymentTransformer extends TransformerAbstract
             'repayment_date' => $repayment->repayment_date,
             'amount' => $repayment->amount,
             'actual_repayment_date' => $repayment->actual_repayment_date,
-            'actual_amount' => $repayment->actual_amount
+            'actual_amount' => $repayment->actual_amount,
+            'status' => $repayment->status
         ];
     }
 }
