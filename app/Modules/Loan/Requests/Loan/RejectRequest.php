@@ -20,7 +20,7 @@ class RejectRequest extends FormRequest
     public function rules()
     {
         return [
-            'notes'=>['nullable']
+            'notes' => ['nullable', 'string', 'max:255']
         ];
     }
 }
