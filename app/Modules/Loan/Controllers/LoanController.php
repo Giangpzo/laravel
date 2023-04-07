@@ -77,6 +77,14 @@ class LoanController extends ApiController
             'approve loan success');
     }
 
+    /**
+     * Reject loan request
+     *
+     * @param RejectRequest $request
+     * @param LoanDataProvider $provider
+     * @param Loan $loan
+     * @return JsonResponse
+     */
     public function rejectLoanRequest(RejectRequest $request, LoanDataProvider $provider, Loan $loan)
     {
         $provider->rejectLoan($loan, $request->get('notes'));
