@@ -54,7 +54,6 @@ class LoanController extends ApiController
     public function show(ShowRequest $request, Loan $loan)
     {
         // no need use policy check, because applied global scope in Loan model
-
         return $this->respondSuccess(
             fractal($loan, new LoanShowTransformer())->toArray(),
             'retrieved loan data success');
