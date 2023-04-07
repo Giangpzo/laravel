@@ -41,7 +41,7 @@ class LoanController extends ApiController
     {
         $createdLoan = $provider->requestLoan($request->get('amount'), $request->get('term'));
 
-        return $this->respondSuccess($createdLoan, 'requested loan success');
+        return $this->respondSuccess(fractal($createdLoan, new LoanShowTransformer())->toArray(), 'requested loan success');
     }
 
     /**

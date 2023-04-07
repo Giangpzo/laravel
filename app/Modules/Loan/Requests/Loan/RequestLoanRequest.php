@@ -2,13 +2,14 @@
 
 namespace App\Modules\Loan\Requests\Loan;
 
+use App\Modules\Loan\Models\Loan;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RequestLoanRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        return auth()->user()->can('requestLoan', Loan::class);
     }
 
     /**

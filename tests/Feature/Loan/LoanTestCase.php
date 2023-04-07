@@ -92,7 +92,8 @@ class LoanTestCase extends TestCase
     {
         $token = $this->login($this->customer->email, $this->customerPassword);
         return $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json'
         ]);
     }
 
@@ -105,7 +106,8 @@ class LoanTestCase extends TestCase
     {
         $token = $this->login($this->anotherCustomer->email, $this->anotherCustomerPassword);
         return $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json'
         ]);
     }
 

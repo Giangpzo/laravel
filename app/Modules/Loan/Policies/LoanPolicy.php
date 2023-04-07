@@ -60,4 +60,15 @@ class LoanPolicy
          */
         return $user->is_admin && $loan->status == Loan::STATUS_PENDING;
     }
+
+    /**
+     * Determine whether the user can request loan
+     *
+     * @param User $user
+     * @return mixed
+     */
+    public function requestLoan(User $user)
+    {
+        return $user->is_customer;
+    }
 }
